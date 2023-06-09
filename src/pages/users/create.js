@@ -1,5 +1,5 @@
 import ContentHeader from "../../components/_common/content/contentHeader";
-// import UserFormElement from "./elements/form";
+import UserFormElement from "./elements/form";
 import { useState } from "react";
 
 export default function UserCreate() {
@@ -27,7 +27,7 @@ export default function UserCreate() {
                                 <div className="card-header text-white bg-primary">
                                     <h3 className="card-title">{ title }</h3>
                                 </div>
-                                {/* <UserFormElement /> */}
+                                <UserFormElement />
                             </div>
                         </div>
                     </div>

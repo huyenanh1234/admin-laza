@@ -1,18 +1,34 @@
 import ContentHeader from "../../components/_common/content/contentHeader";
-import {useCallback, useEffect, useState} from "react";
+import {useCallback, useEffect, useState, useRef} from "react";
 import {Link} from "react-router-dom";
-//import userApis from "../../api/baseAdmin/user";
-//import {USER} from "../../helpers/constants";
-// import Swal from "sweetalert2";
-// import withReactContent from "sweetalert2-react-content";
-// import {toast} from "react-toastify";
-// import {useForm} from "react-hook-form";
-// import UserImport from "./elements/userImport";
-// import UserExport from "./elements/userExport";
+import {USER, PAGINATION} from "../../helpers/constants";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
+import {toast} from "react-toastify";
+import {useForm} from "react-hook-form";
+import UserImport from "./elements/userImport";
+import UserExport from "./elements/userExport";
+import userApis from "../../api/baseAdmin/user";
+import CustomPagination from "../../components/_common/customPagination";
 
+const userIndexSwal = withReactContent(Swal);
 
 export default function UserIndex() {
-   
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+        setError,
+        setValue,
+        getValues
+    }= useForm({
+        defaultValues: {
+            name: '',
+            email: '',
+            phone: '',
+            level: ''
+        }
+    });
     const [breadcrumb] = useState([
         {
             title: 'Home',
@@ -26,55 +42,55 @@ export default function UserIndex() {
     const [parentTitle] = useState('Quản lý users');
     const [title] = useState('Danh sách users');
     const [users, setUsers] = useState([]);
+    const currentPage = useRef(PAGINATION.startPage);
 
-    // useEffect(() => {
-    //     getUsers();
-    // }, []);
+    useEffect(() => {
+        getUsers();
+    }, []);
 
-    // const getUsers = useCallback(() => {
-    //     (
-    //         async () => {
-    //             const usersResponse = await userApis.index();
+    const getUsers = (data = {}, page = PAGINATION.startPage) => {
+        if (page !== currentPage.current) {
+            currentPage.current = page;
+        }
 
-    //             if (usersResponse.success) {
-    //                 setUsers(usersResponse.data);
-    //             }
-    //         }
-    //     )()
-    // }, []);
+        (
+            async () => {
+                for (const field in data) {
+                    if (!data[field]) {
+                        delete data[field];
+                    }
+                }
 
-    // const handleDelete = async (userId) => {
-    //     userIndexSwal.fire({
-    //         title: 'Bạn có muốn xóa user này không?',
-    //         showCancelButton: true,
-    //         confirmButtonText: 'Đồng ý',
-    //         cancelButtonText: 'Hủy'
-    //     }).then(async (result) => {
-    //         if (result.isConfirmed) {
-    //             const deleteUser = await userApis.destroy(userId);
+                const usersResponse = await userApis.index(data, page);
 
-    //             if (deleteUser.success) {
-    //                 toast.success(() => <p>Xóa user thành công!</p>);
-    //                 getUsers()
-    //             }
-    //         }
-    //     })
-    // };
+                if (usersResponse.success) {
+                    setUsers(usersResponse.data);
+                }
+            }
+        )()
+    };
 
-    // const filter = async (data) => {
-    //     for (const field in data) {
-    //         if (!data[field]) {
-    //             delete data[field];
-    //         }
-    //     }
+    const handleDelete = async (userId) => {
+        userIndexSwal.fire({
+            title: 'Bạn có muốn xóa user này không?',
+            showCancelButton: true,
+            confirmButtonText: 'Đồng ý',
+            cancelButtonText: 'Hủy'
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                const deleteUser = await userApis.destroy(userId);
 
-    //     const usersResponse = await userApis.index(data);
+                if (deleteUser.success) {
+                    toast.success(() => <p>Xóa user thành công!</p>);
+                    getUsers(getValues(), currentPage.current)
+                }
+            }
+        })
+    };
 
-    //     if (usersResponse.success) {
-    //         setUsers(usersResponse.data);
-    //     }
-    // };
-
+    const filter = (data) => {
+        getUsers(data)
+    };
     return (
         <>
             <ContentHeader breadcrumb={breadcrumb} title={parentTitle}/>
@@ -87,19 +103,19 @@ export default function UserIndex() {
                                     <h3 className="card-title">Tìm kiếm</h3>
                                 </div>
                                 <div className={'card-body'}>
-                                    <form onSubmit="{handleSubmit(filter)}">
+                                    <form onSubmit={handleSubmit(filter)}>
                                         <div className={"row mb-3"}>
                                             <div className="col-3">
                                                 <input
                                                     type="text"
                                                     className="form-control"
                                                     placeholder={"Họ tên"}
-                                                    // {...register('name', {
-                                                    //     maxLength: {
-                                                    //         value: 50,
-                                                    //         message: "Họ tên không được lớn hơn 50 ký tự"
-                                                    //     }
-                                                    // })}
+                                                    {...register('name', {
+                                                        maxLength: {
+                                                            value: 50,
+                                                            message: "Họ tên không được lớn hơn 50 ký tự"
+                                                        }
+                                                    })}
                                                 />
                                             </div>
                                             <div className="col-3">
@@ -107,12 +123,12 @@ export default function UserIndex() {
                                                     type="email"
                                                     className="form-control"
                                                     placeholder={"Email"}
-                                                    // {...register('email', {
-                                                    //     maxLength: {
-                                                    //         value: 50,
-                                                    //         message: "Email không được lớn hơn 50 ký tự"
-                                                    //     }
-                                                    // })}
+                                                    {...register('email', {
+                                                        maxLength: {
+                                                            value: 50,
+                                                            message: "Email không được lớn hơn 50 ký tự"
+                                                        }
+                                                    })}
                                                 />
                                             </div>
                                             <div className="col-3">
@@ -120,30 +136,30 @@ export default function UserIndex() {
                                                     type="text"
                                                     className="form-control"
                                                     placeholder={"Số điện thoại"}
-                                                    // {...register('phone', {
-                                                    //     maxLength: {
-                                                    //         value: 11,
-                                                    //         message: "Số điện thoại không được lớn hơn 11 ký tự"
-                                                    //     },
-                                                    //     minLength: {
-                                                    //         value: 10,
-                                                    //         message: "Số điện thoại không được ít hơn 10 ký tự"
-                                                    //     }
-                                                    // })}
+                                                    {...register('phone', {
+                                                        maxLength: {
+                                                            value: 11,
+                                                            message: "Số điện thoại không được lớn hơn 11 ký tự"
+                                                        },
+                                                        minLength: {
+                                                            value: 10,
+                                                            message: "Số điện thoại không được ít hơn 10 ký tự"
+                                                        }
+                                                    })}
                                                 />
                                             </div>
                                             <div className="col-3">
                                                 <select className="form-select" aria-label="Phân quyền"
-                                                        // {...register('level')}
+                                                        {...register('level')}
                                                 >
-                                                    {/* <option value={''}>Phân quyền</option>
+                                                    <option value={''}>Phân quyền</option>
                                                     <option
                                                         value={USER.levels.super_admin.value.toString()}
                                                     >
                                                         {USER.levels.super_admin.label}
                                                     </option>
                                                     <option value={USER.levels.admin.value.toString()}>{USER.levels.admin.label}</option>
-                                                    <option value={USER.levels.user.value.toString()}>{USER.levels.user.label}</option> */}
+                                                    <option value={USER.levels.user.value.toString()}>{USER.levels.user.label}</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -153,8 +169,8 @@ export default function UserIndex() {
                                                 <button type="submit" className="btn btn-primary me-2">
                                                     Tìm kiếm
                                                 </button>
-                                                {/* <UserImport getUsers={getUsers}></UserImport>
-                                                <UserExport data={getValues()}></UserExport> */}
+                                                <UserImport getUsers={getUsers}></UserImport>
+                                                <UserExport data={getValues()}></UserExport>
                                             </div>
                                         </div>
                                     </form>
@@ -179,7 +195,7 @@ export default function UserIndex() {
                                         </thead>
                                         <tbody>
                                         {
-                                            users.map( (user, index) => {
+                                            users.docs && users.docs.map( (user, index) => {
                                                 return (
                                                     <tr key={index}>
                                                         <td>
@@ -196,12 +212,12 @@ export default function UserIndex() {
                                                         </td>
                                                         <td>
                                                             {
-                                                                // Object.values(USER.levels).find( level => level.value === user.level).label
+                                                                Object.values(USER.levels).find( level => level.value === user.level).label
                                                             }
                                                         </td>
                                                         <td className={'text-center'}>
-                                                            <button type="button" className="btn btn-danger me-2" >Xóa</button>
-                                                            <Link className="btn btn-success">Chỉnh sửa</Link>
+                                                            <button type="button" className="btn btn-danger me-2" onClick={() => handleDelete(user._id)}>Xóa</button>
+                                                            <Link to={ user._id + '/edit' } className="btn btn-success">Chỉnh sửa</Link>
                                                         </td>
                                                     </tr>
                                                 )
@@ -209,6 +225,11 @@ export default function UserIndex() {
                                         }
                                         </tbody>
                                     </table>
+                                    <CustomPagination
+                                        page={users.page}
+                                        pages={users.pages}
+                                        onPageChange={page => getUsers(getValues(), page)}
+                                    />
                                 </div>
                             </div>
                         </div>

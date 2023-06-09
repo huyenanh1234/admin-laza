@@ -2,6 +2,7 @@ import MainSidebar from "../components/_common/mainSidebar/mainSidebar"
 import Navigation from "../components/_common/navigation/navigation"
 import Footer from "../components/_common/footer/footer"
 import { Outlet } from "react-router-dom"
+
 export default function Layout(){
 
     return (

@@ -2,7 +2,25 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAngleLeft, faUsers } from "@fortawesome/free-solid-svg-icons";
 import { faCircle } from "@fortawesome/free-regular-svg-icons";
 import { NavLink } from "react-router-dom";
+import { useEffect } from 'react';
 export default function MainSidebar(){
+    useEffect(()=>{
+        document.querySelectorAll(".main-sidebar .nav-sidebar > .nav-item").forEach((i)=>{
+            document.querySelector(".nav-link").addEventListener("click", (e)=>{
+                e.preventDefault();
+                console.log(11);
+                if (i.classList.contains('menu-is-opening') && i.classList.contains('menu-open')){
+                    i.classList.remove("menu-is-opening");
+                    i.classList.remove("menu-open");
+                }
+                else {
+                    i.classList.add("menu-is-opening");
+                    i.classList.add("menu-open");
+                }
+            })
+        })
+        
+    },[])
     return (
         <>
             <div className="main-sidebar sidebar-dark-primary">

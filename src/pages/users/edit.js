@@ -1,5 +1,5 @@
 import ContentHeader from "../../components/_common/content/contentHeader";
-//import UserFormElement from "./elements/form";
+import UserFormElement from "./elements/form";
 import { useState } from "react";
 
 export default function UserEdit() {
@@ -27,7 +27,7 @@ export default function UserEdit() {
                                 <div className="card-header text-white bg-success">
                                     <h3 className="card-title">{ title }</h3>
                                 </div>
-                                {/* <UserFormElement isUpdate={true} /> */}
+                                <UserFormElement isUpdate />
                             </div>
                         </div>
                     </div>

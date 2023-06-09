@@ -5,6 +5,15 @@ import { faComments, faBell, faStar } from "@fortawesome/free-regular-svg-icons"
 
 
 const Navigation = () => {
+    
+    const collapseSidebar = (e)=>{
+        e.preventDefault();
+        document.getElementById("main").classList.add("sidebar-collapse")
+    }
+
+
+    
+
     return (
         <>
             <nav className="main-header navbar navbar-expand-lg navbar-light bg-white">
@@ -12,7 +21,7 @@ const Navigation = () => {
                     <ul className="navbar-nav mb-2 mb-lg-0 mx-3">
                         <li className="nav-item">
                             <a href="http://localhost:3000/" className="nav-link" 
-                            //onClick={collapseSidebar}
+                            onClick={collapseSidebar}
                             >
                                 
                             <FontAwesomeIcon icon={faBars} /></a>
