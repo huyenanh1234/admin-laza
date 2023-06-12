@@ -2,8 +2,20 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAngleLeft, faUsers } from "@fortawesome/free-solid-svg-icons";
 import { faCircle } from "@fortawesome/free-regular-svg-icons";
 import { NavLink } from "react-router-dom";
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import profileApis from '../../../api/baseAdmin/profile';
+
 export default function MainSidebar(){
+    const [user,setUser] = useState({});
+    useEffect(() => {
+        (async () => {
+            const responseShowProfile = await profileApis.show();
+            //console.log(responseShowProfile.data);
+            setUser(responseShowProfile.data);
+        })()
+    }, []);
+    
+    //console.log(user);
     useEffect(()=>{
         document.querySelectorAll(".main-sidebar .nav-sidebar > .nav-item").forEach((i)=>{
             document.querySelector(".nav-link").addEventListener("click", (e)=>{
@@ -19,8 +31,9 @@ export default function MainSidebar(){
                 }
             })
         })
-        
+    
     },[])
+
     return (
         <>
             <div className="main-sidebar sidebar-dark-primary">
@@ -41,8 +54,9 @@ export default function MainSidebar(){
                                     className={"nav-link"}
                                     end
                                 >
-                                    Huyền Anh
+                                    {user?.name}
                                 </NavLink>
+                                
                             </div>
                         </div>
 

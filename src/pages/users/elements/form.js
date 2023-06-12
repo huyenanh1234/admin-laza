@@ -30,6 +30,7 @@ export default function UserFormElement({isUpdate = false})
                     const userResponse = await userApis.show(urlParams.userId);
                     console.log(11);
                     if (userResponse.success) {
+                        setValue('avata', userResponse.data.name)
                         setValue('name', userResponse.data.name)
                         setValue('email', userResponse.data.email)
                         setValue('phone', userResponse.data.phone)

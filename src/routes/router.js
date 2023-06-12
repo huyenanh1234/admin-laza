@@ -8,6 +8,7 @@ import AuthLayout from "../pages/auth/authLayout";
 import Login from "../pages/auth/login";
 import ChangePassword from "../pages/auth/changePassword";
 import UserEdit from "../pages/users/edit";
+import ProfileIndex from "../pages/profile";
 const router = createBrowserRouter([
     {
         path: "/",
@@ -35,6 +36,10 @@ const router = createBrowserRouter([
                     }
                 ]
             },
+            {
+                path:"profile",
+                element:<ProfileIndex/>
+            }
         ]
     },
     {

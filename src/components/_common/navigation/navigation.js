@@ -2,7 +2,7 @@ import React from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars, faExpandArrowsAlt } from "@fortawesome/free-solid-svg-icons";
 import { faComments, faBell, faStar } from "@fortawesome/free-regular-svg-icons";
-
+import { Link } from "react-router-dom";
 
 const Navigation = () => {
     
