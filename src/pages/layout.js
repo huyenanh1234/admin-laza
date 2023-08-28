@@ -3,8 +3,31 @@ import Navigation from "../components/_common/navigation/navigation"
 import Footer from "../components/_common/footer/footer"
 import { Outlet } from "react-router-dom"
 import { ToastContainer } from "react-toastify"
+import 'react-toastify/dist/ReactToastify.css';
+import { useDispatch, useSelector } from "react-redux"
+import { useCookies } from "react-cookie"
+import { useEffect } from "react"
+import profileApis from "../api/baseAdmin/profile"
+import { createAuthUser } from "../features/auth/authSlice"
+
 
 export default function Layout(){
+    const auth = useSelector(state=>state.auth)
+    const dispatch = useDispatch()
+    const [cookie, setCookie] = useCookies(["user_token"])
+
+    useEffect(()=>{
+        if(!auth.user){
+            (
+                async()=>{
+                    const profileRes = await profileApis.show();
+                    if(profileRes.success){
+                        dispatch(createAuthUser(profileRes.data));
+                    }
+                }
+            )()
+        }
+    },[cookie])
 
     return (
         <>

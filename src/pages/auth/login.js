@@ -4,8 +4,14 @@ import {useCookies} from "react-cookie";
 import {useNavigate} from "react-router-dom";
 import moment from "moment";
 //import {useDispatch, useSelector} from "react-redux";
-
+//0981934614//123456
 export default function Login() {
+    
+    //REDUX:  init, action: mô tả action, reducer: thực hiện action
+    //dispatch: gọi 1 function nào đấy, liên kết giữa action vs reducer object
+    
+   // const auth = useSelector(state=> state.auth)
+
     const {
         register,
         handleSubmit,
@@ -20,7 +26,6 @@ export default function Login() {
         if (loginResponse.success) {
             setCookie('user_token', loginResponse.data.user_token, { path: '/' , expires: moment().add(1, 'months').toDate()})
             navigate('/');
-
             return;
         }
         loginResponse.errors.forEach((error) => {
@@ -31,7 +36,6 @@ export default function Login() {
             })
         })
     }
-
     return (
         <>
             <form className={"pb-3"} onSubmit={handleSubmit(login)} >

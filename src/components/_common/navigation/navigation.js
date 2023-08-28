@@ -2,18 +2,19 @@ import React from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars, faExpandArrowsAlt } from "@fortawesome/free-solid-svg-icons";
 import { faComments, faBell, faStar } from "@fortawesome/free-regular-svg-icons";
-import { Link } from "react-router-dom";
-
+import {useCookies} from "react-cookie";
 const Navigation = () => {
-    
+    const [cookies, setCookie, removeCookie] = useCookies([]);
     const collapseSidebar = (e)=>{
         e.preventDefault();
         document.getElementById("main").classList.add("sidebar-collapse")
     }
 
-
-    
-
+    const logout = (e) => {
+        e.preventDefault();
+        removeCookie('user_token');
+        window.location.href = process.env.REACT_APP_APP_DOMAIN + 'login';
+    }
     return (
         <>
             <nav className="main-header navbar navbar-expand-lg navbar-light bg-white">
@@ -24,7 +25,7 @@ const Navigation = () => {
                             onClick={collapseSidebar}
                             >
                                 
-                            <FontAwesomeIcon icon={faBars} /></a>
+                            <i icon={faBars} /></a>
                         </li>
                     </ul>
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
@@ -139,7 +140,7 @@ const Navigation = () => {
                         </li>
                         <li className={"nav-item max-3"}>
                             <a className="nav-link active text-primary" href="#" 
-                            //onClick={(e) => logout(e)}
+                            onClick={(e) => logout(e)}
                             >
                                 Đăng xuất
                             </a>

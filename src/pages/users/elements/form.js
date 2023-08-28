@@ -109,7 +109,7 @@ export default function UserFormElement({isUpdate = false})
                     <div className="mb-3">
                         <label htmlFor="inputName" className="form-label">Email <span className={'text-danger fw-bold'}>*</span></label>
                         <input
-                            disabled={isUpdate}
+                            //disabled={isUpdate}
                             type="email"
                             className="form-control"
                             id="inputName"

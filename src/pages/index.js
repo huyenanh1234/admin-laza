@@ -7,6 +7,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import Chart from "chart.js/auto";
 import {CategoryScale} from "chart.js";
 import {Line} from "react-chartjs-2";
+import { Provider } from "react-redux";
 
 Chart.register(CategoryScale)
 const data = [
