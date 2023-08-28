@@ -10,7 +10,6 @@ import { updateAuthUser } from "../../features/auth/authSlice";
 
 export default function ProfileIndex()
 {
-
     const auth = useSelector(state=> state.auth)
     const dispatch = useDispatch()
 
@@ -80,7 +79,6 @@ export default function ProfileIndex()
             imageRef.current.src = URL.createObjectURL(e.target.files[0]);
         }
     }
-    
     return (
         <>
             <ContentHeader breadcrumb={breadcrumb}/>
@@ -93,7 +91,6 @@ export default function ProfileIndex()
                                     <h3 className="card-title">{ title }</h3>
                                 </div>
                                 <form onSubmit={handleSubmit(update)}>
-                                    
                                     <div className={'p-3 col-6'}>
                                         <div className="mb-3">
                                             <img 
