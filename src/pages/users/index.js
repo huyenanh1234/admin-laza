@@ -41,28 +41,25 @@ export default function UserIndex() {
     ]);
     const [parentTitle] = useState('Quản lý users');
     const [title] = useState('Danh sách users');
-    const [users, setUsers] = useState([]);
+    const [users, setUsers] = useState({});
     const currentPage = useRef(PAGINATION.startPage);
 
     useEffect(() => {
         getUsers();
     }, []);
 
-    const getUsers = (data = {}, page = PAGINATION.startPage) => {
+    const getUsers = (data = {}, page=PAGINATION.startPage) => {
         if (page !== currentPage.current) {
             currentPage.current = page;
         }
-
         (
             async () => {
                 for (const field in data) {
                     if (!data[field]) {
                         delete data[field];
                     }
-                }
-
+                }                
                 const usersResponse = await userApis.index(data, page);
-
                 if (usersResponse.success) {
                     setUsers(usersResponse.data);
                 }
@@ -104,6 +101,7 @@ export default function UserIndex() {
                                 </div>
                                 <div className={'card-body'}>
                                     <form onSubmit={handleSubmit(filter)}>
+                                    
                                         <div className={"row mb-3"}>
                                             <div className="col-3">
                                                 <input
@@ -176,7 +174,6 @@ export default function UserIndex() {
                                     </form>
                                 </div>
                             </div>
-
                             <div className="card mb-3">
                                 <div className="card-header">
                                     <h3 className="card-title">{ title }</h3>
@@ -195,7 +192,7 @@ export default function UserIndex() {
                                         </thead>
                                         <tbody>
                                         {
-                                            users.docs && users.docs.map( (user, index) => {
+                                            users.data && users.data.map( (user, index) => {
                                                 return (
                                                     <tr key={index}>
                                                         <td>
@@ -225,6 +222,8 @@ export default function UserIndex() {
                                         }
                                         </tbody>
                                     </table>
+                                    <>
+                                    </>
                                     <CustomPagination
                                         page={users.page}
                                         pages={users.pages}

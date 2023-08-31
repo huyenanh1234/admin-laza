@@ -4,15 +4,14 @@ import { PAGINATION } from "../../helpers/constants";
 const baseRoute = 'users/'
 
 const userApis = {
+    //index: (params = {}) => {
     index: (params = {}, page = PAGINATION.startPage, limit = PAGINATION.limit) => {
-
-        return baseAdminAxios.get(baseRoute, {
+        return baseAdminAxios.get(baseRoute, { 
             params:{
                 ...params,
-                pagination: {
                     page,
                     limit
-                }
+                
             },
             headers: getHeaderWithAuthorizationBearerToken()
         });

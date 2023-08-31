@@ -23,8 +23,8 @@ function UserImport({ getUsers })
     const intervalId = useRef();
 
     useEffect(() => {
-        getUserImportHistory();
-        showUserImportNewest();
+        // getUserImportHistory();
+        // showUserImportNewest();
 
         return () => {
             clearInterval(intervalId.current);
