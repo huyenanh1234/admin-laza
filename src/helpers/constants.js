@@ -40,6 +40,6 @@ export const USER_IMPORT = {
 export const PAGINATION = {
     ellipsisPostion: 3,
     maxPagesShowAll: 3,
-    limit: 3,
+    limit: 20,
     startPage: 1,
 }

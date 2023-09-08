@@ -9,6 +9,9 @@ import Login from "../pages/auth/login";
 import ChangePassword from "../pages/auth/changePassword";
 import UserEdit from "../pages/users/edit";
 import ProfileIndex from "../pages/profile";
+import BrandIndex from "../pages/brands";
+import BrandEdit from "../pages/brands/edit";
+import BrandCreate from "../pages/brands/create";
 const router = createBrowserRouter([
     {
         path: "/",
@@ -33,6 +36,23 @@ const router = createBrowserRouter([
                     {
                         path:":userId/edit",
                         element:<UserEdit/>,
+                    }
+                ]
+            },
+            {
+                path: "brands",
+                children: [
+                    {
+                        index: true,
+                        element: <BrandIndex />,
+                    },
+                    {
+                        path: "create",
+                        element: <BrandCreate />,
+                    },
+                    {
+                        path:":brandId/edit",
+                        element:<BrandEdit/>,
                     }
                 ]
             },

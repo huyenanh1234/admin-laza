@@ -22,14 +22,11 @@ export default function UserFormElement({isUpdate = false})
     });
     let urlParams = useParams();
     let navigate = useNavigate();
-    //console.log(urlParams);
     useEffect(() => {
         if (isUpdate) {
             (
                 async () => {
                     const userResponse = await userApis.show(urlParams.userId);
-                    console.log(urlParams.userId);
-                    console.log(userResponse);
                     if (userResponse.success) {
                         setValue('avata', userResponse.data.avatar)
                         setValue('name', userResponse.data.name)

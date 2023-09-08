@@ -16,7 +16,6 @@ export default function MainSidebar(){
         document.querySelectorAll(".main-sidebar .nav-sidebar > .nav-item").forEach((i)=>{
             document.querySelector(".nav-link").addEventListener("click", (e)=>{
                 e.preventDefault();
-                console.log(11);
                 if (i.classList.contains('menu-is-opening') && i.classList.contains('menu-open')){
                     i.classList.remove("menu-is-opening");
                     i.classList.remove("menu-open");
@@ -89,6 +88,39 @@ export default function MainSidebar(){
                                                 <FontAwesomeIcon icon={faCircle} className={"nav-icon"} />
                                                 <p>
                                                     Thêm mới User
+                                                </p>
+                                            </NavLink>
+                                        </li>
+                                    </ul>
+                                    <a href={"http://localhost:3000/"} className={"nav-link active"}>
+                                        <FontAwesomeIcon icon={faUsers} className={"nav-icon"} />
+                                        <p>
+                                            Quản lý Brands
+                                            <FontAwesomeIcon icon={faAngleLeft} className={"right"}/>
+                                        </p>
+                                    </a>
+                                    <ul className={"nav nav-treeview"}>
+                                        <li className={"nav-item"}>
+                                            <NavLink
+                                                to={'brands'}
+                                                className={"nav-link"}
+                                                end
+                                            >
+                                                <FontAwesomeIcon icon={faCircle} className={"nav-icon"} />
+                                                <p>
+                                                    Danh sách Brand
+                                                </p>
+                                            </NavLink>
+                                        </li>
+                                        <li className={"nav-item"}>
+                                            <NavLink
+                                                to={'brands/create'}
+                                                className={"nav-link"}
+                                                end
+                                            >
+                                                <FontAwesomeIcon icon={faCircle} className={"nav-icon"} />
+                                                <p>
+                                                    Thêm mới Brand
                                                 </p>
                                             </NavLink>
                                         </li>

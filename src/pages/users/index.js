@@ -1,5 +1,5 @@
 import ContentHeader from "../../components/_common/content/contentHeader";
-import {useCallback, useEffect, useState, useRef} from "react";
+import { useEffect, useState, useRef} from "react";
 import {Link} from "react-router-dom";
 import {USER, PAGINATION} from "../../helpers/constants";
 import Swal from "sweetalert2";
@@ -23,9 +23,7 @@ export default function UserIndex() {
         getValues
     }= useForm({
         defaultValues: {
-            name: '',
-            email: '',
-            phone: '',
+            keyword:'',
             level: ''
         }
     });
@@ -103,45 +101,15 @@ export default function UserIndex() {
                                     <form onSubmit={handleSubmit(filter)}>
                                     
                                         <div className={"row mb-3"}>
-                                            <div className="col-3">
+                                            <div className="col-6">
                                                 <input
                                                     type="text"
                                                     className="form-control"
-                                                    placeholder={"Họ tên"}
-                                                    {...register('name', {
+                                                    placeholder={"Nhập từ khóa cần tìm"}
+                                                    {...register('keyword', {
                                                         maxLength: {
                                                             value: 50,
                                                             message: "Họ tên không được lớn hơn 50 ký tự"
-                                                        }
-                                                    })}
-                                                />
-                                            </div>
-                                            <div className="col-3">
-                                                <input
-                                                    type="email"
-                                                    className="form-control"
-                                                    placeholder={"Email"}
-                                                    {...register('email', {
-                                                        maxLength: {
-                                                            value: 50,
-                                                            message: "Email không được lớn hơn 50 ký tự"
-                                                        }
-                                                    })}
-                                                />
-                                            </div>
-                                            <div className="col-3">
-                                                <input
-                                                    type="text"
-                                                    className="form-control"
-                                                    placeholder={"Số điện thoại"}
-                                                    {...register('phone', {
-                                                        maxLength: {
-                                                            value: 11,
-                                                            message: "Số điện thoại không được lớn hơn 11 ký tự"
-                                                        },
-                                                        minLength: {
-                                                            value: 10,
-                                                            message: "Số điện thoại không được ít hơn 10 ký tự"
                                                         }
                                                     })}
                                                 />

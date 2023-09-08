@@ -9,7 +9,7 @@ const profileApis = {
         });
     },
     update: (data) => {
-        return baseAdminAxios.post(baseRoute, data,{
+        return baseAdminAxios.put(baseRoute, data,{
             headers: getHeaderWithAuthorizationBearerToken()
         });
     },
