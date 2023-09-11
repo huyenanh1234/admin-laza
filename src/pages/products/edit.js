@@ -1,20 +1,21 @@
 import ContentHeader from "../../components/_common/content/contentHeader";
 import { useState } from "react";
-import CategoryFormElement from "./categoryFormElement";
+import ProductFormElement from "./productFromElement";
 
-export default function CategoryEdit() {
+
+export default function ProductEdit() {
     const [breadcrumb] = useState([
         {
             title: 'Home',
             link: '/'
         },
         {
-            title: 'Quản lý categories',
-            link: 'categories'
+            title: 'Quản lý products',
+            link: 'products'
         },
     ])
-    const [parentTitle] = useState('Quản lý categories')
-    const [title] = useState('Chỉnh sửa categories')
+    const [parentTitle] = useState('Quản lý products')
+    const [title] = useState('Chỉnh sửa products')
 
     return (
         <>
@@ -27,7 +28,7 @@ export default function CategoryEdit() {
                                 <div className="card-header text-white bg-success">
                                     <h3 className="card-title">{ title }</h3>
                                 </div>
-                                <CategoryFormElement isUpdate />
+                                <ProductFormElement isUpdate />
                             </div>
                         </div>
                     </div>

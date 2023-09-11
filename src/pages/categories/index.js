@@ -94,6 +94,7 @@ export default function CategoryIndex() {
                                             <th style={{width:10}}>#</th>
                                             <th>Tên danh mục</th>
                                             <th>Mô tả</th>
+                                            <th>Label</th>
                                         </tr>
                                         </thead>
                                         <tbody>

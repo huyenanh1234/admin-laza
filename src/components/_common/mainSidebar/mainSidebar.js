@@ -161,32 +161,32 @@ export default function MainSidebar(){
                                     <a href={"http://localhost:3000/"} className={"nav-link active"}>
                                         <FontAwesomeIcon icon={faUsers} className={"nav-icon"} />
                                         <p>
-                                            Quản lý Classifies
+                                            Quản lý Products
                                             <FontAwesomeIcon icon={faAngleLeft} className={"right"}/>
                                         </p>
                                     </a>
                                     <ul className={"nav nav-treeview"}>
                                         <li className={"nav-item"}>
                                             <NavLink
-                                                to={'users'}
+                                                to={'products'}
                                                 className={"nav-link"}
                                                 end
                                             >
                                                 <FontAwesomeIcon icon={faCircle} className={"nav-icon"} />
                                                 <p>
-                                                    Danh sách Classifies
+                                                    Danh sách Product
                                                 </p>
                                             </NavLink>
                                         </li>
                                         <li className={"nav-item"}>
                                             <NavLink
-                                                to={'users/create'}
+                                                to={'products/create'}
                                                 className={"nav-link"}
                                                 end
                                             >
                                                 <FontAwesomeIcon icon={faCircle} className={"nav-icon"} />
                                                 <p>
-                                                    Thêm mới Classify
+                                                    Thêm mới Product
                                                 </p>
                                             </NavLink>
                                         </li>

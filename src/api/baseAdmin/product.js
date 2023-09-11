@@ -3,7 +3,7 @@ import {getHeaderWithAuthorizationBearerToken} from "../../helpers/common";
 import { PAGINATION } from "../../helpers/constants";
 const baseRoute = 'classifies/'
 
-const classifyApis = {
+const productApis = {
     index: (params = {}, page = PAGINATION.startPage, limit = PAGINATION.limit) => {
         return baseAdminAxios.get(baseRoute, { 
             params:{
@@ -14,8 +14,8 @@ const classifyApis = {
             headers: getHeaderWithAuthorizationBearerToken()
         });
     },
-    destroy: (classifyId) => {
-        return baseAdminAxios.delete(baseRoute + classifyId, {
+    destroy: (productId) => {
+        return baseAdminAxios.delete(baseRoute + productId, {
             headers: getHeaderWithAuthorizationBearerToken()
         });
     },
@@ -24,16 +24,16 @@ const classifyApis = {
             headers: getHeaderWithAuthorizationBearerToken()
         })
     },
-    show: (classifyId) => {
-        return baseAdminAxios.get(baseRoute + classifyId, {
+    show: (productId) => {
+        return baseAdminAxios.get(baseRoute + productId, {
             headers: getHeaderWithAuthorizationBearerToken()
         });
     },
-    update: (classifyId, data) => {
-        return baseAdminAxios.put(baseRoute + classifyId, data, {
+    update: (productId, data) => {
+        return baseAdminAxios.put(baseRoute + productId, data, {
             headers: getHeaderWithAuthorizationBearerToken()
         });
     },
 };
 
-export default classifyApis;
+export default productApis;

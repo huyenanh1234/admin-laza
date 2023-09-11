@@ -15,9 +15,10 @@ import BrandCreate from "../pages/brands/create";
 import CategoryIndex from "../pages/categories";
 import CategoryCreate from "../pages/categories/create";
 import CategoryEdit from "../pages/categories/edit";
-import ClassifyIndex from "../pages/classifies";
-import ClassifyCreate from "../pages/classifies/create";
-import ClassifyEdit from "../pages/classifies/edit";
+import ProductIndex from "../pages/products";
+import ProductCreate from "../pages/products/create";
+import ProductEdit from "../pages/products/edit";
+
 const router = createBrowserRouter([
     {
         path: "/",
@@ -80,19 +81,19 @@ const router = createBrowserRouter([
                 ]
             },
             {
-                path: "classifies",
+                path: "products",
                 children: [
                     {
                         index: true,
-                        element: <ClassifyIndex />,
+                        element: <ProductIndex />,
                     },
                     {
                         path: "create",
-                        element: <ClassifyCreate />,
+                        element: <ProductCreate />,
                     },
                     {
-                        path:":classifyId/edit",
-                        element:<ClassifyEdit />,
+                        path:":productId/edit",
+                        element:<ProductEdit />,
                     }
                 ]
             },

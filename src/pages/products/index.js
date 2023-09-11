@@ -7,11 +7,11 @@ import withReactContent from "sweetalert2-react-content";
 import {toast} from "react-toastify";
 import CustomPagination from "../../components/_common/customPagination";
 import { useForm } from "react-hook-form";
-import classifyApis from "../../api/baseAdmin/classifiy";
+import productApis from "../../api/baseAdmin/product";
 
-const categoryIndexSwal = withReactContent(Swal);
+const productIndexSwal = withReactContent(Swal);
 
-export default function CategoryIndex() {
+export default function ProductIndex() {
     const {
         getValues
     }= useForm({
@@ -26,20 +26,20 @@ export default function CategoryIndex() {
             link: '/'
         },
         {
-            title: 'Quản lý categories',
-            link: 'categories'
+            title: 'Quản lý products',
+            link: 'products'
         },
     ]);
-    const [parentTitle] = useState('Quản lý categories');
-    const [title] = useState('Danh sách categories');
-    const [categories, setcategories] = useState({});
+    const [parentTitle] = useState('Quản lý products');
+    const [title] = useState('Danh sách products');
+    const [products, setproducts] = useState({});
     const currentPage = useRef(PAGINATION.startPage);
 
     useEffect(() => {
-        getcategories();
+        getproducts();
     }, []);
 
-    const getcategories = (data = {}, page=PAGINATION.startPage) => {
+    const getproducts = (data = {}, page=PAGINATION.startPage) => {
         if (page !== currentPage.current) {
             currentPage.current = page;
         }
@@ -50,27 +50,27 @@ export default function CategoryIndex() {
                         delete data[field];
                     }
                 }                
-                const categoriesResponse = await classifyApis.index(data, page);
-                if (categoriesResponse.success) {
-                    setcategories(categoriesResponse.data);
+                const productsResponse = await productApis.index(data, page);
+                if (productsResponse.success) {
+                    setproducts(productsResponse.data);
                 }
             }
         )()
     };
 
-    const handleDelete = async (categoryId) => {
-        categoryIndexSwal.fire({
-            title: 'Bạn có muốn xóa category này không?',
+    const handleDelete = async (productId) => {
+        productIndexSwal.fire({
+            title: 'Bạn có muốn xóa product này không?',
             showCancelButton: true,
             confirmButtonText: 'Đồng ý',
             cancelButtonText: 'Hủy'
         }).then(async (result) => {
             if (result.isConfirmed) {
-                const deletecategory = await categoryApis.destroy(categoryId);
+                const deleteproduct = await productApis.destroy(productId);
 
-                if (deletecategory.success) {
-                    toast.success(() => <p>Xóa category thành công!</p>);
-                    getcategories(getValues(), currentPage.current)
+                if (deleteproduct.success) {
+                    toast.success(() => <p>Xóa product thành công!</p>);
+                    getproducts(getValues(), currentPage.current)
                 }
             }
         })
@@ -91,27 +91,31 @@ export default function CategoryIndex() {
                                         <thead>
                                         <tr className={'text-center'}>
                                             <th style={{width:10}}>#</th>
-                                            <th>Tên danh mục</th>
+                                            <th>Tên product</th>
                                             <th>Mô tả</th>
+                                            <th>Giá</th>
+                                            <th>Thumbnail</th>
+                                            <th>Số lượng</th>
+                                            <th>Label</th>
                                         </tr>
                                         </thead>
                                         <tbody>
                                         {
-                                            categories.data && categories.data.map( (category, index) => {
+                                            products.data && products.data.map( (product, index) => {
                                                 return (
                                                     <tr key={index}>
                                                         <td>
                                                             { index + 1 }
                                                         </td>
                                                         <td>
-                                                            { category.name }
+                                                            { product.name }
                                                         </td>
                                                         <td>
-                                                            { category.description }
+                                                            { product.description }
                                                         </td>
                                                         <td className={'text-center'}>
-                                                            <button type="button" className="btn btn-danger me-2" onClick={() => handleDelete(category._id)}>Xóa</button>
-                                                            <Link to={ category._id + '/edit' } className="btn btn-success">Chỉnh sửa</Link>
+                                                            <button type="button" className="btn btn-danger me-2" onClick={() => handleDelete(product._id)}>Xóa</button>
+                                                            <Link to={ product._id + '/edit' } className="btn btn-success">Chỉnh sửa</Link>
                                                         </td>
                                                     </tr>
                                                 )
@@ -122,9 +126,9 @@ export default function CategoryIndex() {
                                     <>
                                     </>
                                     <CustomPagination
-                                        page={categories.page}
-                                        pages={categories.pages}
-                                        onPageChange={page => getcategories(getValues(), page)}
+                                        page={products.page}
+                                        pages={products.pages}
+                                        onPageChange={page => getproducts(getValues(), page)}
                                     />
                                 </div>
                             </div>

@@ -1,7 +1,7 @@
 import baseAdminAxios from "../../plugins/axios";
 import {getHeaderWithAuthorizationBearerToken} from "../../helpers/common";
 import { PAGINATION } from "../../helpers/constants";
-const baseRoute = 'categories/'
+const baseRoute = 'products/'
 
 const categoryApis = {
     index: (params = {}, page = PAGINATION.startPage, limit = PAGINATION.limit) => {

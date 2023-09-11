@@ -93,6 +93,7 @@ export default function BrandIndex() {
                                             <th style={{width:10}}>#</th>
                                             <th>Tên thương hiệu</th>
                                             <th>Mô tả</th>
+                                            <th>Label</th>
                                         </tr>
                                         </thead>
                                         <tbody>

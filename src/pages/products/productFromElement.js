@@ -2,8 +2,10 @@ import {useEffect} from "react";
 import {useNavigate, useParams} from "react-router-dom";
 import { useForm } from "react-hook-form";
 import {toast} from "react-toastify";
+import productApis from "../../api/baseAdmin/product";
+import ClassifyFormElement from "./classifyFormElement";
 
-export default function classifyFormElement({isUpdate = false})
+export default function ProductFormElement({isUpdate = false})
 {
     const {
         register,
@@ -14,6 +16,9 @@ export default function classifyFormElement({isUpdate = false})
     } = useForm({
         defaultValues: {
             name: '',
+            price: 0,
+            quanlity: 0,
+            thumbnail: undefined,
             description: '',
         }
     });
@@ -23,11 +28,10 @@ export default function classifyFormElement({isUpdate = false})
         if (isUpdate) {
             (
                 async () => {
-                    console.log(urlParams.classifyId);
-                    const classifyResponse = await classifyApis.show(urlParams.classifyId);
-                    if (classifyResponse.success) {
-                        setValue('name', classifyResponse.data.name)
-                        setValue('description', classifyResponse.data.description)
+                    const productResponse = await productApis.show(urlParams.productId);
+                    if (productResponse.success) {
+                        setValue('name', productResponse.data.name)
+                        setValue('description', productResponse.data.description)
                     }
                 }
             )()
@@ -35,21 +39,21 @@ export default function classifyFormElement({isUpdate = false})
     }, [isUpdate, urlParams])
 
     const store = async (data) => {
-        const classifyResponse = await classifyApis.store(data);
+        const productResponse = await productApis.store(data);
 
-        if (classifyResponse.success) {
-            navigate("/classifies");
-            toast.success(() => <p>Thêm mới classify <b>{classifyResponse.data.name}</b> thành công!</p>);
-
-            return;
-        }
-
-        if (!classifyResponse.errors.length) {
-            toast.error(() => <p>Thêm mới classify <b>{data.name}</b> thất bại!</p>);
+        if (productResponse.success) {
+            navigate("/products");
+            toast.success(() => <p>Thêm mới product <b>{productResponse.data.name}</b> thành công!</p>);
 
             return;
         }
-        classifyResponse.errors.forEach((error) => {
+
+        if (!productResponse.errors.length) {
+            toast.error(() => <p>Thêm mới product <b>{data.name}</b> thất bại!</p>);
+
+            return;
+        }
+        productResponse.errors.forEach((error) => {
             const [key, value] = Object.entries(error)[0]
             setError(key, {
                 type: 'server',
@@ -59,18 +63,18 @@ export default function classifyFormElement({isUpdate = false})
     }
 
     const update = async (data) => {
-        const classifyResponse = await classifyApis.update(urlParams.classifyId, data);
+        const productResponse = await productApis.update(urlParams.productId, data);
 
-        if (classifyResponse.success) {
-            toast.success(() => <p>Chỉnh sửa classify <b>{data.name}</b> thành công!</p>);
+        if (productResponse.success) {
+            toast.success(() => <p>Chỉnh sửa product <b>{data.name}</b> thành công!</p>);
 
             return;
         }
 
-        if (!classifyResponse.errors.length) {
-            toast.error(() => <p>Chỉnh sửa classify <b>{data.name}</b> thất bại!</p>);
+        if (!productResponse.errors.length) {
+            toast.error(() => <p>Chỉnh sửa product <b>{data.name}</b> thất bại!</p>);
         }
-        classifyResponse.errors.forEach((error) => {
+        productResponse.errors.forEach((error) => {
             const [key, value] = Object.entries(error)[0];
             setError(key, {
                 type: 'server',
@@ -84,16 +88,16 @@ export default function classifyFormElement({isUpdate = false})
             <form onSubmit={handleSubmit(isUpdate ? update : store)}>
                 <div className={'p-3 col-6'}>
                     <div className="mb-3">
-                        <label htmlFor="inputName" className="form-label">Tên danh mục <span className={'text-danger fw-bold'}>*</span></label>
+                        <label htmlFor="inputName" className="form-label">Tên product <span className={'text-danger fw-bold'}>*</span></label>
                         <input
                             type="text"
                             className="form-control"
                             id="inputName"
                             {...register('name', {
-                                required:'Tên danh mục không được để trống',
+                                required:'Tên product không được để trống',
                                 maxLength: {
                                     value: 50,
-                                    message: "Tên danh mục không được lớn hơn 50 ký tự"
+                                    message: "Tên product không được lớn hơn 50 ký tự"
                                 }
                             })}
                         />
@@ -110,6 +114,7 @@ export default function classifyFormElement({isUpdate = false})
                         />
                         {errors.email && <p className={'text-danger fw-bold'}>{errors.email.message}</p>}
                     </div>
+                    <ClassifyFormElement />
                 </div>
                 <div className="card-footer">
                     {
