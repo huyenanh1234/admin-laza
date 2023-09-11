@@ -125,6 +125,72 @@ export default function MainSidebar(){
                                             </NavLink>
                                         </li>
                                     </ul>
+                                    <a href={"http://localhost:3000/"} className={"nav-link active"}>
+                                        <FontAwesomeIcon icon={faUsers} className={"nav-icon"} />
+                                        <p>
+                                            Quản lý Categories
+                                            <FontAwesomeIcon icon={faAngleLeft} className={"right"}/>
+                                        </p>
+                                    </a>
+                                    <ul className={"nav nav-treeview"}>
+                                        <li className={"nav-item"}>
+                                            <NavLink
+                                                to={'categories'}
+                                                className={"nav-link"}
+                                                end
+                                            >
+                                                <FontAwesomeIcon icon={faCircle} className={"nav-icon"} />
+                                                <p>
+                                                    Danh sách Category
+                                                </p>
+                                            </NavLink>
+                                        </li>
+                                        <li className={"nav-item"}>
+                                            <NavLink
+                                                to={'categories/create'}
+                                                className={"nav-link"}
+                                                end
+                                            >
+                                                <FontAwesomeIcon icon={faCircle} className={"nav-icon"} />
+                                                <p>
+                                                    Thêm mới Category
+                                                </p>
+                                            </NavLink>
+                                        </li>
+                                    </ul>
+                                    <a href={"http://localhost:3000/"} className={"nav-link active"}>
+                                        <FontAwesomeIcon icon={faUsers} className={"nav-icon"} />
+                                        <p>
+                                            Quản lý Classifies
+                                            <FontAwesomeIcon icon={faAngleLeft} className={"right"}/>
+                                        </p>
+                                    </a>
+                                    <ul className={"nav nav-treeview"}>
+                                        <li className={"nav-item"}>
+                                            <NavLink
+                                                to={'users'}
+                                                className={"nav-link"}
+                                                end
+                                            >
+                                                <FontAwesomeIcon icon={faCircle} className={"nav-icon"} />
+                                                <p>
+                                                    Danh sách Classifies
+                                                </p>
+                                            </NavLink>
+                                        </li>
+                                        <li className={"nav-item"}>
+                                            <NavLink
+                                                to={'users/create'}
+                                                className={"nav-link"}
+                                                end
+                                            >
+                                                <FontAwesomeIcon icon={faCircle} className={"nav-icon"} />
+                                                <p>
+                                                    Thêm mới Classify
+                                                </p>
+                                            </NavLink>
+                                        </li>
+                                    </ul>
                                 </li>
                             </ul>
                         </nav>

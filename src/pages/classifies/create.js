@@ -1,20 +1,20 @@
 import ContentHeader from "../../components/_common/content/contentHeader";
-import BrandFormElement from "./brandFormElement";
 import { useState } from "react";
+import CategoryFormElement from "./categoryFormElement";
 
-export default function BrandEdit() {
+export default function CategoryCreate() {
     const [breadcrumb] = useState([
         {
             title: 'Home',
             link: '/'
         },
         {
-            title: 'Quản lý brands',
-            link: 'brands'
+            title: 'Quản lý categories',
+            link: 'categories'
         },
     ])
-    const [parentTitle] = useState('Quản lý brands')
-    const [title] = useState('Chỉnh sửa brand')
+    const [parentTitle] = useState('Quản lý categories')
+    const [title] = useState('Thêm mới category')
 
     return (
         <>
@@ -24,10 +24,10 @@ export default function BrandEdit() {
                     <div className={'row'}>
                         <div className={'col-12'}>
                             <div className="card mb-3">
-                                <div className="card-header text-white bg-success">
+                                <div className="card-header text-white bg-primary">
                                     <h3 className="card-title">{ title }</h3>
                                 </div>
-                                <BrandFormElement isUpdate />
+                                <CategoryFormElement />
                             </div>
                         </div>
                     </div>

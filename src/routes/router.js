@@ -12,6 +12,12 @@ import ProfileIndex from "../pages/profile";
 import BrandIndex from "../pages/brands";
 import BrandEdit from "../pages/brands/edit";
 import BrandCreate from "../pages/brands/create";
+import CategoryIndex from "../pages/categories";
+import CategoryCreate from "../pages/categories/create";
+import CategoryEdit from "../pages/categories/edit";
+import ClassifyIndex from "../pages/classifies";
+import ClassifyCreate from "../pages/classifies/create";
+import ClassifyEdit from "../pages/classifies/edit";
 const router = createBrowserRouter([
     {
         path: "/",
@@ -53,6 +59,40 @@ const router = createBrowserRouter([
                     {
                         path:":brandId/edit",
                         element:<BrandEdit/>,
+                    }
+                ]
+            },
+            {
+                path: "categories",
+                children: [
+                    {
+                        index: true,
+                        element: <CategoryIndex />,
+                    },
+                    {
+                        path: "create",
+                        element: <CategoryCreate />,
+                    },
+                    {
+                        path:":categoryId/edit",
+                        element:<CategoryEdit />,
+                    }
+                ]
+            },
+            {
+                path: "classifies",
+                children: [
+                    {
+                        index: true,
+                        element: <ClassifyIndex />,
+                    },
+                    {
+                        path: "create",
+                        element: <ClassifyCreate />,
+                    },
+                    {
+                        path:":classifyId/edit",
+                        element:<ClassifyEdit />,
                     }
                 ]
             },
