@@ -1,13 +1,17 @@
 import React from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBars, faExpandArrowsAlt } from "@fortawesome/free-solid-svg-icons";
+import {  faExpandArrowsAlt } from "@fortawesome/free-solid-svg-icons";
 import { faComments, faBell, faStar } from "@fortawesome/free-regular-svg-icons";
 import {useCookies} from "react-cookie";
+import {FaBars} from "react-icons/fa"
 const Navigation = () => {
     const [cookies, setCookie, removeCookie] = useCookies([]);
     const collapseSidebar = (e)=>{
         e.preventDefault();
-        document.getElementById("main").classList.add("sidebar-collapse")
+        if (document.getElementById("main").classList.contains("sidebar-collapse")) {
+            document.getElementById("main").classList.remove("sidebar-collapse")
+        }
+        else document.getElementById("main").classList.add("sidebar-collapse")
     }
 
     const logout = (e) => {
@@ -24,8 +28,8 @@ const Navigation = () => {
                             <a href="http://localhost:3000/" className="nav-link" 
                             onClick={collapseSidebar}
                             >
-                                
-                            <i icon={faBars} /></a>
+                                <FaBars></FaBars>
+                            </a>
                         </li>
                     </ul>
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">

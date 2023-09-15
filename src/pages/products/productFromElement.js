@@ -1,12 +1,11 @@
-import {useEffect} from "react";
-import {useNavigate, useParams} from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import {toast} from "react-toastify";
+import { toast } from "react-toastify";
 import productApis from "../../api/baseAdmin/product";
 import ClassifyFormElement from "./classifyFormElement";
 
-export default function ProductFormElement({isUpdate = false})
-{
+export default function ProductFormElement({ isUpdate = false }) {
     const {
         register,
         handleSubmit,
@@ -82,6 +81,17 @@ export default function ProductFormElement({isUpdate = false})
             })
         })
     }
+    const [countClassifyElements, setCountClassifyElements] = useState(1);
+    const getClassifyElements = () => {
+        const elements = [];
+        for ( let i=0 ; i < countClassifyElements ; i++) {
+            elements.push(<ClassifyFormElement key={i}/>)
+        }
+        return elements;
+    }
+    const addClassifyElement = () => {
+        setCountClassifyElements(countClassifyElements+1)
+    }
 
     return (
         <>
@@ -94,7 +104,7 @@ export default function ProductFormElement({isUpdate = false})
                             className="form-control"
                             id="inputName"
                             {...register('name', {
-                                required:'Tên product không được để trống',
+                                required: 'Tên product không được để trống',
                                 maxLength: {
                                     value: 50,
                                     message: "Tên product không được lớn hơn 50 ký tự"
@@ -114,12 +124,19 @@ export default function ProductFormElement({isUpdate = false})
                         />
                         {errors.email && <p className={'text-danger fw-bold'}>{errors.email.message}</p>}
                     </div>
-                    <ClassifyFormElement />
+                    <div id="classifiesForm" className="mb-3">
+                        <label htmlFor="inputName" className="form-label">Classify <span className={'text-danger fw-bold'}>*</span></label>
+                        <button id="btnAddClassify" onClick={addClassifyElement}>Thêm</button>
+                        {
+                            getClassifyElements()
+                        }
+                    </div>
+
                 </div>
                 <div className="card-footer">
                     {
                         (() => {
-                            if (isUpdate){
+                            if (isUpdate) {
                                 return (
                                     <button
                                         className={'btn btn-success'}
