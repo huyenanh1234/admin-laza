@@ -25,7 +25,6 @@ export default function BrandFormElement({isUpdate = false})
             (
                 async () => {
                     const brandResponse = await brandApis.show(urlParams.brandId);
-                    console.log(brandResponse);
                     if (brandResponse.success) {
                         setValue('name', brandResponse.data.name)
                         setValue('description', brandResponse.data.description)

@@ -4,7 +4,6 @@ import {USER} from "../../helpers/constants";
 import {useForm} from "react-hook-form";
 import {toast} from "react-toastify";
 import profileApis from "../../api/baseAdmin/profile";
-import { generateFileToUrl } from "../../helpers/common";
 import { useDispatch, useSelector } from "react-redux";
 import { updateAuthUser } from "../../features/auth/authSlice";
 
@@ -17,9 +16,7 @@ export default function ProfileIndex()
         register,
         handleSubmit,
         formState: { errors },
-        setError,
         setValue,
-        getValues,
     } = useForm({
         defaultValues: {
             name: '',

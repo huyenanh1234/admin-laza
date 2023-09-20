@@ -1,20 +1,18 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleLeft, faUsers } from "@fortawesome/free-solid-svg-icons";
 import { faCircle } from "@fortawesome/free-regular-svg-icons";
-import { NavLink } from "react-router-dom";
-import { useEffect, useState } from 'react';
-import profileApis from '../../../api/baseAdmin/profile';
-import { generateFileToUrl } from '../../../helpers/common';
+import { NavLink } from 'react-router-dom';
+import { useEffect } from 'react';
 import { useSelector} from 'react-redux';
-
 
 export default function MainSidebar(){
     
     const auth = useSelector(state=>state.auth)
     
     useEffect(()=>{
+        
         document.querySelectorAll(".main-sidebar .nav-sidebar > .nav-item").forEach((i)=>{
-            document.querySelector(".nav-link").addEventListener("click", (e)=>{
+            i.querySelector(".nav-link").addEventListener("click", (e)=>{
                 e.preventDefault();
                 if (i.classList.contains('menu-is-opening') && i.classList.contains('menu-open')){
                     i.classList.remove("menu-is-opening");
@@ -58,8 +56,8 @@ export default function MainSidebar(){
                         {/* Sidebar menu */}
                         <nav className="mt-2 sidebar-menu">
                             <ul className={"nav nav-pills nav-sidebar flex-column"} data-widget="treeview" role="menu" data-accordion="false">
-                                <li className={"nav-item menu-open menu-is-opening"}>
-                                    <a href={"http://localhost:3000/"} className={"nav-link active"}>
+                                <li className={"nav-item"}>
+                                    <a href={"http://localhost:3000/"} className={"nav-link"}>
                                         <FontAwesomeIcon icon={faUsers} className={"nav-icon"} />
                                         <p>
                                             Quản lý Users
@@ -92,7 +90,9 @@ export default function MainSidebar(){
                                             </NavLink>
                                         </li>
                                     </ul>
-                                    <a href={"http://localhost:3000/"} className={"nav-link active"}>
+                                </li>
+                                <li className={"nav-item"}>
+                                    <a href={"http://localhost:3000/"} className={"nav-link"}>
                                         <FontAwesomeIcon icon={faUsers} className={"nav-icon"} />
                                         <p>
                                             Quản lý Brands
@@ -125,7 +125,9 @@ export default function MainSidebar(){
                                             </NavLink>
                                         </li>
                                     </ul>
-                                    <a href={"http://localhost:3000/"} className={"nav-link active"}>
+                                </li>
+                                <li className={"nav-item"}>
+                                    <a href={"http://localhost:3000/"} className={"nav-link"}>
                                         <FontAwesomeIcon icon={faUsers} className={"nav-icon"} />
                                         <p>
                                             Quản lý Categories
@@ -158,7 +160,9 @@ export default function MainSidebar(){
                                             </NavLink>
                                         </li>
                                     </ul>
-                                    <a href={"http://localhost:3000/"} className={"nav-link active"}>
+                                </li>
+                                <li className={"nav-item"}>
+                                    <a href={"http://localhost:3000/"} className={"nav-link"}>
                                         <FontAwesomeIcon icon={faUsers} className={"nav-icon"} />
                                         <p>
                                             Quản lý Products

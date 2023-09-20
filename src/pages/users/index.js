@@ -47,6 +47,7 @@ export default function UserIndex() {
     }, []);
 
     const getUsers = (data = {}, page=PAGINATION.startPage) => {
+        console.log(data);
         if (page !== currentPage.current) {
             currentPage.current = page;
         }
